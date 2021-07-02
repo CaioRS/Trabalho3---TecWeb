@@ -54,6 +54,8 @@ function listar() {
                 document.write("<li>Quantidade no estoque: "+produto.quantidade+"</li>");
                 document.write("</ul>");
             });
+            // Aqui tento criar um botão via script para retornar a tela, porem não deu certo
+           // document.createElement(<input type="button" value="Tela Cadastro" onclick="window.open('cadastro.html','_self')">)
         }
     }   
 }
