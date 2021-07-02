@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<!--Declaração arq externo-->
+<head>
+    <title>Cadastro de novos produtos</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="format.css">
+    <script src="script.js"></script>
+</head>
+
+<body onload="carregaLista('totalLista')">
+
+    <div class="carrinho">
+        <p>Itens disponíveis para Compra: <span id="totalLista">0</span></p>
+    </div>
+    
+    <!--Formulário: Nome, código e quantidade de produtos-->
+    <form>
+        <table>
+            <caption>Cadastro de novos produtos</caption>
+            <!--Nome do produto-->
+            <tr>
+                <td class="alinharRotulos">Nome do produto:</td>
+                <td><input id="txtNomeProduto" type="text"></td>
+            </tr>
+            <!--Código do produto-->
+            <tr>
+                <td class="alinharRotulos">Código do produto:</td>
+                <td><input id="txtCodProduto" type="text"></td>
+            </tr>
+            <!--Quantidade do produto-->
+            <tr>
+                <td class="alinharRotulos">Quantidade do produto:</td>
+                <td>
+                    <select id="qtidadeProduto">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </td>
+            </tr>
+            <!--Botoes-->
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="button" value="Cadastrar" class="alinhaBtns" onclick="validar('txtNomeProduto','txtCodProduto','qtidadeProduto')">
+                    <input type="button" value="Ver Lista" class="alinhaBtns" onclick="window.open('lista.html','_self')">
+                    <input type="reset" value="Limpar" class="alinhaBtns">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>
