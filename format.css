@@ -10,7 +10,12 @@
     border-radius: 17px;
     cursor: pointer;
 }
-
+.carrinho {
+    font-size: 30px;
+}
+.carrinho p {
+    display: inline;
+}
 table {
     clear:both; 
     background-color: rgb(126, 4, 112);
