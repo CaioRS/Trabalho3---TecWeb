@@ -44,8 +44,12 @@ function carregaLista(idCampo) {
         document.getElementById(idCampo).innerHTML = totalLista;
     }
 }
+function limpar() {
+    localStorage.clear();
+    location.reload();
+}
 
-function coletar(aux) {
+function coletar() {
     let produtos = JSON.parse(localStorage.getItem("listaProdutos"));
     let aColetar = [];
     var aux2 = 0;
@@ -59,11 +63,25 @@ function coletar(aux) {
                 };
                 aColetar.push(carrola);
             }
+            aux2++;
         });
         localStorage.setItem("listaCompras", JSON.stringify(aColetar));
+        atualizarEstoque();
     }
 }
 
+function atualizarEstoque() {
+    let produtos = JSON.parse(localStorage.getItem("listaProdutos"));
+    let coletas = JSON.parse(localStorage.getItem("listaCompras"));
+    produtos.forEach(function(produto,i) {
+        coletas.forEach(coleta =>{
+            if ((produto.codigo == coleta.cod) && (produto.qtidadeProduto <= coleta.qtd)) {
+                var ctrl = "prod"+i;
+                document.getElementById(ctrl).style.textDecoration = "line-through";
+            }
+        });
+    });
+}
 
 function listar() {
     if (typeof (Storage) !== "undefined") {
@@ -77,7 +95,7 @@ function listar() {
 
             produtos.forEach(produto => {
                 if (produto.ativo == "on") {
-                    document.write("<div>");
+                    document.write("<div id='prod"+ aux + "'>");
                     document.write("<ul>");
                     document.write("<li>Código do produto: " + produto.codigo + "</li>");
                     document.write("<li>Nome do produto: " + produto.nome + "</li>");
