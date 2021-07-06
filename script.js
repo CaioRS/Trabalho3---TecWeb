@@ -71,16 +71,28 @@ function coletar() {
 }
 
 function atualizarEstoque() {
+    let proBD = [];
     let produtos = JSON.parse(localStorage.getItem("listaProdutos"));
     let coletas = JSON.parse(localStorage.getItem("listaCompras"));
     produtos.forEach(function(produto,i) {
         coletas.forEach(coleta =>{
             if ((produto.codigo == coleta.cod) && (produto.qtidadeProduto <= coleta.qtd)) {
                 var ctrl = "prod"+i;
+                let aux = 
+                    {
+                        Nome: produto.nome,
+                        Unidade: produto.unidade,
+                        Quantidade: produto.qtidadeProduto,
+                        CodigoBarra: produto.txtCodBarras,
+                        Ativo: produto.atv,
+                        QuantComprada: coleta.qtd
+                    };
+                proBD.push(aux);
                 document.getElementById(ctrl).style.textDecoration = "line-through";
             }
         });
     });
+    proBD = JSON.stringify(proBD);
 }
 
 function listar() {
