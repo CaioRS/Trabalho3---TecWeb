@@ -1,22 +1,22 @@
 function validar(txtCodProduto, txtNomeProduto, unidade, qtidadeProduto, txtCodBarras, ativo) {
     let codigo = document.getElementById(txtCodProduto).value;
     let nome = document.getElementById(txtNomeProduto).value;
-    let unidade = document.getElementById(unidade).value;
-    let qtidadeProduto = document.getElementById(qtidadeProduto).value;
-    let txtCodBarras = document.getElementById(txtCodBarras).value;
-    let ativo = document.getElementById(ativo).value;
+    let un = document.getElementById(unidade).value;
+    let qtd = document.getElementById(qtidadeProduto).value;
+    let qr = document.getElementById(txtCodBarras).value;
+    let atv = document.getElementById(ativo).value;
 
-    cadastrarProduto(parseInt(codigo), nome, unidade, parseInt(qtidadeProduto), txtCodBarras, ativo);
+    cadastrarProduto(parseInt(codigo), nome, un, parseInt(qtd), qr, atv);
 }
 
-function cadastrarProduto(produto, codig, unidade, qtidadeProduto, qtidadeProduto, txtCodBarras, ativo) {
+function cadastrarProduto(produto, codig, un, qtd, qr, atv) {
     let novoProduto = {
         nome: produto,
         codigo: codig,
-        unidade: unidade,
-        qtd: qtidadeProduto,
-        qr: txtCodBarras,
-        atv: ativo
+        unidade: un,
+        qtidadeProduto: qtd,
+        txtCodBarras: qr,
+        ativo: atv
     };
 
     if (typeof (Storage) !== "undefined") {
@@ -25,7 +25,7 @@ function cadastrarProduto(produto, codig, unidade, qtidadeProduto, qtidadeProdut
         else produtos = JSON.parse(produtos);
         produtos.push(novoProduto); // Adiciona um novo produto
         localStorage.setItem("produtos", JSON.stringify(produtos))
-        alert("Foram cadastradas com sucesso " + qtidade + " unidades do produto " + produto + "!");
+        alert("Foram cadastradas com sucesso " + qtd + " unidades do produto " + produto + "!");
         atualizarLista("totalLista");
         location.reload();
     }
@@ -56,7 +56,10 @@ function listar() {
                 document.write("<ul>");
                 document.write("<li>Nome do produto: " + produto.nome + "</li>");
                 document.write("<li>Código do produto: " + produto.codigo + "</li>");
-                document.write("<li>Quantidade na Lista: " + produto.quantidade + "</li>");
+                document.write("<li>Quantidade na Lista: " + produto.unidade + "</li>");
+                document.write("<li>Nome do produto: " + produto.qtidadeProduto + "</li>");
+                document.write("<li>Código do produto: " + produto.txtCodBarras + "</li>");
+                document.write("<li>Quantidade na Lista: " + produto.ativo + "</li>");
                 document.write("</ul>");
             });
             // Aqui tento criar um botão via script para retornar a tela, porem não deu certo
