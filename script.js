@@ -28,14 +28,11 @@ function cadastrarProduto(codig, nome, un, qtd, qr, atv) {
         produtos.push(novoProduto); // Adiciona um novo produto
         localStorage.setItem("listaProdutos", JSON.stringify(produtos));
         alert("Foram cadastradas com sucesso " + qtd + " unidades do produto " + nome + "!");
-        atualizarLista("totalLista");
         location.reload();
     }
 }
 
-function atualizarLista(idCampo) {
-    localStorage.setItem("totalLista", ++document.getElementById(idCampo).innerHTML)
-}
+
 
 function carregaLista(idCampo) {
     if (typeof (Storage) !== "undefined") {
@@ -74,25 +71,44 @@ function atualizarEstoque() {
     let proBD = [];
     let produtos = JSON.parse(localStorage.getItem("listaProdutos"));
     let coletas = JSON.parse(localStorage.getItem("listaCompras"));
-    produtos.forEach(function(produto,i) {
-        coletas.forEach(coleta =>{
+    produtos.forEach(function (produto, i) {
+        coletas.forEach(coleta => {
             if ((produto.codigo == coleta.cod) && (produto.qtidadeProduto <= coleta.qtd)) {
-                var ctrl = "prod"+i;
-                let aux = 
-                    {
-                        Nome: produto.nome,
-                        Unidade: produto.unidade,
-                        Quantidade: produto.qtidadeProduto,
-                        CodigoBarra: produto.txtCodBarras,
-                        Ativo: produto.atv,
-                        QuantComprada: coleta.qtd
-                    };
+                var ctrl = "prod" + i;
+                let aux =
+                {
+                    Nome: produto.nome,
+                    Unidade: produto.unidade,
+                    Quantidade: produto.qtidadeProduto,
+                    CodigoBarra: produto.txtCodBarras,
+                    Ativo: produto.atv,
+                    QuantComprada: coleta.qtd
+                };
                 proBD.push(aux);
                 document.getElementById(ctrl).style.textDecoration = "line-through";
             }
         });
     });
-    proBD = JSON.stringify(proBD);
+    fetch("https://60e3e08b6c365a0017839407.mockapi.io" + "/Compras", {
+        method: "POST",
+    })
+        .then((response) => response.json())
+        .then((response) => {
+            fetch(
+                "https://60e3e08b6c365a0017839407.mockapi.io" + "/Compras" + response.CodCompras + "/produtos",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(proBD),
+                }
+            )
+                .then((response) => { })
+                .catch((erro) =>
+                    console.log("Houve Algum Erro" + erro)
+                );
+        })
+        .catch((erro) => console.log("Houve Algum Erro" + erro));
+
 }
 
 function listar() {
@@ -107,7 +123,7 @@ function listar() {
 
             produtos.forEach(produto => {
                 if (produto.ativo == "on") {
-                    document.write("<div id='prod"+ aux + "'>");
+                    document.write("<div id='prod" + aux + "'>");
                     document.write("<ul>");
                     document.write("<li>Código do produto: " + produto.codigo + "</li>");
                     document.write("<li>Nome do produto: " + produto.nome + "</li>");
@@ -123,3 +139,4 @@ function listar() {
         }
     }
 }
+
