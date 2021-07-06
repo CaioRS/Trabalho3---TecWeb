@@ -1,75 +1,77 @@
 <!DOCTYPE html>
 <html>
 <!--Declaração arq externo-->
+
 <head>
     <title>Cadastro de novos produtos</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="format.css">
     <script src="script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 
 <body onload="carregaLista('totalLista')">
 
     <div class="carrinho" id="carrinho">
-        <p>Itens disponíveis para Compra: <span id="totalLista">0</span></p>
-    </div>
-    
-    <!--Formulário: Nome, código e quantidade de produtos-->
-    <form>
-        <table>
-            <caption>Cadastro de novos produtos</caption>
-            
-            <!--Código do produto-->
-            <tr>
-                <td class="alinharRotulos">Código do produto:</td>
-                <td><input id="txtCodProduto" type="number"></td>
-            </tr>
-            
-            <!--Nome do produto-->
-            <tr>
-                <td class="alinharRotulos">Nome do produto:</td>
-                <td><input id="txtNomeProduto" type="text" required></td>
-            </tr>
-            <!--unidade-->
-            <tr>
-                <td class="alinharRotulos">Unidade:</td>
-                <td>
-                    <select id="unidade">
-                        <option value="un">Unidade</option>
-                        <option value="kg">Kilo</option>
-                        <option value="lt">Litro</option>
-                        <option value="mt">Metro</option>
-                        <option value="pc">Pacote</option>
-                    </select>
-                </td>
-            </tr>
-            <!--Quantidade do produto-->
-            <tr>
-                <td class="alinharRotulos">Quantidade do produto:</td>
-                <td><input id="qtidadeProduto" type="number" required></td>
-            </tr>
-            
-             <!--Código de barras-->
-             <tr>
-                <td class="alinharRotulos">Código de barras:</td>
-                <td><input id="txtCodBarras" type="string"></td>
-            </tr>
 
-            <!--ativo-->
-            <tr>
-                <td class="alinharRotulos">Ativo na Lista?</td>
-                <td><input id="ativo" type="checkbox"></td>
-            </tr>
-            
-            <!--Botoes-->
-            <tr>
-                <td colspan="2" style="margin: auto;">
-                    <input type="button" value="Cadastrar" class="alinhaBtns" onclick="validar('txtCodProduto','txtNomeProduto','unidade','qtidadeProduto','txtCodBarras','ativo')">
-                    <input type="button" value="Ver Lista" class="alinhaBtns" onclick="window.open('lista.html','_self')">
-                </td>
-            </tr>
-        </table>
-    </form>
+        <!--Formulário: Nome, código e quantidade de produtos-->
+        <form>
+            <table>
+                <caption>Cadastro de novos produtos</caption>
+
+                <!--Código do produto-->
+                <tr>
+                    <td class="alinharRotulos">Código do produto:</td>
+                    <td><input id="txtCodProduto" type="number"></td>
+                </tr>
+
+                <!--Nome do produto-->
+                <tr>
+                    <td class="alinharRotulos">Nome do produto:</td>
+                    <td><input id="txtNomeProduto" type="text" required></td>
+                </tr>
+                <!--unidade-->
+                <tr>
+                    <td class="alinharRotulos">Unidade:</td>
+                    <td>
+                        <select id="unidade">
+                            <option value="un">Unidade</option>
+                            <option value="kg">Kilo</option>
+                            <option value="lt">Litro</option>
+                            <option value="mt">Metro</option>
+                            <option value="pc">Pacote</option>
+                        </select>
+                    </td>
+                </tr>
+                <!--Quantidade do produto-->
+                <tr>
+                    <td class="alinharRotulos">Quantidade do produto:</td>
+                    <td><input id="qtidadeProduto" type="number" required></td>
+                </tr>
+
+                <!--Código de barras-->
+                <tr>
+                    <td class="alinharRotulos">Código de barras:</td>
+                    <td><input id="txtCodProduto" type="string"></td>
+                </tr>
+
+                <!--ativo-->
+                <tr>
+                    <td class="alinharRotulos">Ativo na Lista?</td>
+                    <td><input id="ativo" type="checkbox"></td>
+                </tr>
+
+                <!--Botoes-->
+            </table>
+            <div class="flex-spaceAround">
+                <input type="button" value="Cadastrar" class="alinhaBtns btnShoppingCart"
+                    onclick="validar('txtCodProduto','txtNomeProduto','unidade','qtidadeProduto','txtCodBarras','ativo')">
+                <input type="button" value="Ver Lista" class="alinhaBtns btnShoppingCart"
+                    onclick="window.open('lista.html','_self')">
+            </div>
+        </form>
 </body>
 
 </html>

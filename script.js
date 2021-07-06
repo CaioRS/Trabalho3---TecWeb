@@ -3,7 +3,7 @@ function validar(txtCodProduto, txtNomeProduto, unidade, qtidadeProduto, txtCodB
     let nome = document.getElementById(txtNomeProduto).value;
     let un = document.getElementById(unidade).value;
     let qtd = document.getElementById(qtidadeProduto).value;
-    let qr = document.getElementById(txtCodBarras).value;
+    let qr = document.getElementById(txtCodProduto).value;
     let atv = document.getElementById(ativo).value;
 
     cadastrarProduto(parseInt(codigo), nome, un, parseInt(qtd), qr, atv);
