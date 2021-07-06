@@ -9,7 +9,7 @@ function validar(txtCodProduto, txtNomeProduto, unidade, qtidadeProduto, txtCodB
     cadastrarProduto(parseInt(codigo), nome, un, parseInt(qtd), qr, atv);
 }
 
-function cadastrarProduto(produto, codig, nome, un, qtd, qr, atv) {
+function cadastrarProduto(codig, nome, un, qtd, qr, atv) {
     let novoProduto = {
         nome: nome,
         codigo: codig,
@@ -18,16 +18,16 @@ function cadastrarProduto(produto, codig, nome, un, qtd, qr, atv) {
         txtCodBarras: qr,
         ativo: atv
     };
-
+    let Storage = localStorage;
 
 
     if (typeof (Storage) !== "undefined") {
-        let produtos = localStorage.getItem("produtos");
+        let produtos = localStorage.getItem("listaProdutos");
         if (produtos == null) produtos = []; // Nenhum produto ainda foi cadastrado
         else produtos = JSON.parse(produtos);
         produtos.push(novoProduto); // Adiciona um novo produto
         localStorage.setItem("listaProdutos", JSON.stringify(produtos));
-        alert("Foram cadastradas com sucesso " + qtd + " unidades do produto " + produto + "!");
+        alert("Foram cadastradas com sucesso " + qtd + " unidades do produto " + nome + "!");
         atualizarLista("totalLista");
         location.reload();
     }
@@ -46,20 +46,22 @@ function carregaLista(idCampo) {
 }
 
 function coletar(aux) {
-    let produtos = localStorage.getItem("listaProdutos");
-    let aColetar = [(aux+1)];
+    let produtos = JSON.parse(localStorage.getItem("listaProdutos"));
+    let aColetar = [];
     var aux2 = 0;
-    produtos.forEach(produto => {
-        var qtdc = document.getElementById(("qtdC"+aux2)).value;
-        if (qtdc != 0) {
-            let carrola = {
-                cod: produto.codigo,
-                qtd: (produto.qtidadeProduto -= qtdc) 
-            };
-            aColetar.push(carrola);
-        }
-    });
-    localStorage.setItem("listaCompras", JSON.stringify(aColetar));
+    if (typeof (Storage) !== "undefined") {
+        produtos.forEach(produto => {
+            var qtdc = parseInt(document.getElementById(("qtdC" + aux2)).value);
+            if (qtdc != 0) {
+                let carrola = {
+                    cod: produto.codigo,
+                    qtd: qtdc
+                };
+                aColetar.push(carrola);
+            }
+        });
+        localStorage.setItem("listaCompras", JSON.stringify(aColetar));
+    }
 }
 
 
@@ -81,7 +83,7 @@ function listar() {
                     document.write("<li>Nome do produto: " + produto.nome + "</li>");
                     document.write("<li>Unidade " + produto.unidade + "</li>");
                     document.write("<li>Quantidade na lista: " + produto.qtidadeProduto + "</li>");
-                    document.write("<li>Quantidade Comprada:<input id='qtdC"+ aux + "' type='number'><li>");
+                    document.write("<li>Quantidade Comprada:<input id='qtdC" + aux + "' type='number'><li>");
                     document.write("<li>Código do produto: " + produto.txtCodBarras + "</li>");
                     document.write("</ul>");
                     document.write("</div>");
