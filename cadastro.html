@@ -52,7 +52,7 @@
              <!--Código de barras-->
              <tr>
                 <td class="alinharRotulos">Código de barras:</td>
-                <td><input id="txtCodProduto" type="string"></td>
+                <td><input id="txtCodBarras" type="string"></td>
             </tr>
 
             <!--ativo-->
@@ -64,9 +64,8 @@
             <!--Botoes-->
             <tr>
                 <td colspan="2" style="margin: auto;">
-                    <input type="button" value="Cadastrar" class="alinhaBtns" onclick="validar('txtNomeProduto','txtCodProduto','qtidadeProduto')">
+                    <input type="button" value="Cadastrar" class="alinhaBtns" onclick="validar('txtCodProduto','txtNomeProduto','unidade','qtidadeProduto','txtCodBarras','ativo')">
                     <input type="button" value="Ver Lista" class="alinhaBtns" onclick="window.open('lista.html','_self')">
-                    <input type="reset" value="Limpar" class="alinhaBtns">
                 </td>
             </tr>
         </table>
