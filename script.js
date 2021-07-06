@@ -1,14 +1,9 @@
-
 function validar(idNomeProduto, idCodProduto, idQtidadeProduto) {
     let nome = document.getElementById(idNomeProduto).value;
     let codigo = document.getElementById(idCodProduto).value;
     let qtidade = document.getElementById(idQtidadeProduto).value;
 
-    if (nome == "")
-        alert("Nome do produto não pode estar em branco.");
-    else if (codigo == "")
-        alert("Código do produto não pode estar em branco.");
-    else cadastrarProduto(nome, codigo, parseInt(qtidade));
+    cadastrarProduto(nome, codigo, parseInt(qtidade));
 }
 
 function cadastrarProduto(produto, codig, qtidade) {
