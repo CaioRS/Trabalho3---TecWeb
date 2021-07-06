@@ -9,9 +9,9 @@ function validar(txtCodProduto, txtNomeProduto, unidade, qtidadeProduto, txtCodB
     cadastrarProduto(parseInt(codigo), nome, un, parseInt(qtd), qr, atv);
 }
 
-function cadastrarProduto(produto, codig, un, qtd, qr, atv) {
+function cadastrarProduto(produto, codig, nome, un, qtd, qr, atv) {
     let novoProduto = {
-        nome: produto,
+        nome: nome,
         codigo: codig,
         unidade: un,
         qtidadeProduto: qtd,
@@ -24,8 +24,9 @@ function cadastrarProduto(produto, codig, un, qtd, qr, atv) {
         if (produtos == null) produtos = []; // Nenhum produto ainda foi cadastrado
         else produtos = JSON.parse(produtos);
         produtos.push(novoProduto); // Adiciona um novo produto
-        localStorage.setItem("produtos", JSON.stringify(produtos))
+        localStorage.setItem("listaProdutos", JSON.stringify(produtos))
         alert("Foram cadastradas com sucesso " + qtd + " unidades do produto " + produto + "!");
+
         atualizarLista("totalLista");
         location.reload();
     }
@@ -41,6 +42,10 @@ function carregaLista(idCampo) {
         if (totalLista == null) totalLista = 0;
         document.getElementById(idCampo).innerHTML = totalLista;
     }
+}
+
+function coletar(params) {
+    
 }
 
 
@@ -62,8 +67,6 @@ function listar() {
                 document.write("<li>Quantidade na Lista: " + produto.ativo + "</li>");
                 document.write("</ul>");
             });
-            // Aqui tento criar um botão via script para retornar a tela, porem não deu certo
-            //document.createElement(<input type="button" value="Tela Cadastro" onclick="window.open('cadastro.html','_self')">)
         }
     }
 }
