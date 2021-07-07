@@ -68,46 +68,51 @@ function coletar() {
 }
 
 function atualizarEstoque() {
-    let proBD = [];
+
     let produtos = JSON.parse(localStorage.getItem("listaProdutos"));
     let coletas = JSON.parse(localStorage.getItem("listaCompras"));
-    produtos.forEach(function (produto, i) {
-        coletas.forEach(coleta => {
-            if ((produto.codigo == coleta.cod) && (produto.qtidadeProduto <= coleta.qtd)) {
-                var ctrl = "prod" + i;
-                let aux =
-                {
-                    Nome: produto.nome,
-                    Unidade: produto.unidade,
-                    Quantidade: produto.qtidadeProduto,
-                    CodigoBarra: produto.txtCodBarras,
-                    Ativo: produto.atv,
-                    QuantComprada: coleta.qtd
-                };
-                proBD.push(aux);
-                document.getElementById(ctrl).style.textDecoration = "line-through";
-            }
-        });
-    });
     fetch("https://60e3e08b6c365a0017839407.mockapi.io" + "/Compras", {
         method: "POST",
     })
         .then((response) => response.json())
         .then((response) => {
-            fetch(
-                "https://60e3e08b6c365a0017839407.mockapi.io" + "/Compras" + response.CodCompras + "/produtos",
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(proBD),
-                }
-            )
-                .then((response) => { })
-                .catch((erro) =>
-                    console.log("Houve Algum Erro" + erro)
-                );
+            produtos.forEach(function (produto, i) {
+                coletas.forEach(coleta => {
+                    if ((produto.codigo == coleta.cod) && (produto.qtidadeProduto <= coleta.qtd)) {
+                        var ctrl = "prod" + i;
+                        let aux =
+                        {
+                            Nome: produto.nome,
+                            Unidade: produto.unidade,
+                            Quantidade: produto.qtidadeProduto,
+                            CodigoBarra: produto.txtCodBarras,
+                            Ativo: produto.atv,
+                            QuantComprada: coleta.qtd
+                        };
+                        document.getElementById(ctrl).style.textDecoration = "line-through";
+                        fetch(
+                            "https://60e3e08b6c365a0017839407.mockapi.io" + "/Compras/" + response.CodCompras + "/produtos",
+                            {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(aux),
+                            }
+                        )
+                            .then((response) => {
+                                
+                            })
+                            .catch((erro) =>
+                                console.log("Houve Algum Erro" + erro)
+                            );
+                    }
+                });
+            });
+            
         })
         .catch((erro) => console.log("Houve Algum Erro" + erro));
+    
+
+
 
 }
 
